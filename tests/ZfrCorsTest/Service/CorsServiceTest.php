@@ -23,6 +23,8 @@ use Laminas\Http\Response as HttpResponse;
 use Laminas\Http\Request as HttpRequest;
 use Laminas\Mvc\MvcEvent;
 use Laminas\Router\Http\RouteMatch;
+use ZfrCors\Exception\DisallowedOriginException;
+use ZfrCors\Exception\InvalidOriginException;
 use ZfrCors\Options\CorsOptions;
 use ZfrCors\Service\CorsService;
 
@@ -287,7 +289,7 @@ class CorsServiceTest extends TestCase
 
         $request->getHeaders()->addHeaderLine('Origin', 'http://unauthorized.com');
 
-        $this->expectException(\ZfrCors\Exception\DisallowedOriginException::class);
+        $this->expectException(DisallowedOriginException::class);
         $this->expectExceptionMessage('The origin "http://unauthorized.com" is not authorized');
 
         $this->corsService->populateCorsResponse($request, $response);
@@ -420,7 +422,7 @@ class CorsServiceTest extends TestCase
         $request = new HttpRequest();
         $request->setUri('https://example.com');
         $request->getHeaders()->addHeaderLine('Origin', 'file:');
-        $this->expectException(\ZfrCors\Exception\InvalidOriginException::class);
+        $this->expectException(InvalidOriginException::class);
         $this->corsService->isCorsRequest($request);
     }
 
@@ -442,7 +444,7 @@ class CorsServiceTest extends TestCase
         $request->getHeaders()->addHeaderLine('Origin', 'http://example.org');
 
         $response = $this->corsService->populateCorsResponse($request, $response, $routeMatch);
-        $this->assertInstanceOf(\Laminas\Http\Response::class, $response);
+        $this->assertInstanceOf(HttpResponse::class, $response);
         $this->assertEquals(
             'http://example.org',
             $response->getHeaders()->get('Access-Control-Allow-Origin')->getFieldValue()
@@ -466,7 +468,7 @@ class CorsServiceTest extends TestCase
 
         $request->getHeaders()->addHeaderLine('Origin', 'http://example.com');
 
-        $this->expectException(\ZfrCors\Exception\DisallowedOriginException::class);
+        $this->expectException(DisallowedOriginException::class);
         $this->corsService->populateCorsResponse($request, $response, $routeMatch);
     }
 }
