@@ -249,7 +249,7 @@ class CorsServiceTest extends TestCase
 
         $this->assertFalse($headers->get('Origin'));
         $this->assertNotFalse($headers->get('Vary'));
-        $this->assertContains('Origin', $headers->get('Vary')->getFieldValue());
+        $this->assertStringContainsString('Origin', $headers->get('Vary')->getFieldValue());
     }
 
     public function testEnsureNoVaryHeaderWhenAcceptsAnyOrigin(): void
