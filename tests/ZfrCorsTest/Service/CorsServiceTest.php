@@ -22,7 +22,6 @@ use PHPUnit\Framework\TestCase as TestCase;
 use Laminas\Http\Response as HttpResponse;
 use Laminas\Http\Request as HttpRequest;
 use Laminas\Mvc\MvcEvent;
-use Laminas\Mvc\Router\Http\RouteMatch as DeprecatedRouteMatch;
 use Laminas\Router\Http\RouteMatch;
 use ZfrCors\Options\CorsOptions;
 use ZfrCors\Service\CorsService;
@@ -352,9 +351,9 @@ class CorsServiceTest extends TestCase
         $this->assertTrue($this->corsService->isCorsRequest($request));
     }
 
-    public function testCanHandleUnconfiguredRouteMatch()
+    public function testCanHandleUnconfiguredRouteMatch(): void
     {
-        $routeMatch = class_exists(DeprecatedRouteMatch::class) ? new DeprecatedRouteMatch([]) : new RouteMatch([]);
+        $routeMatch = new RouteMatch([]);
 
         $request = new HttpRequest();
         $request->getHeaders()->addHeaderLine('Origin', 'http://example.com');
@@ -376,9 +375,8 @@ class CorsServiceTest extends TestCase
         $this->assertEquals('true', $headers->get('Access-Control-Allow-Credentials')->getFieldValue());
     }
 
-    public function testCanHandleConfiguredRouteMatch()
+    public function testCanHandleConfiguredRouteMatch(): void
     {
-
         $routeMatchParameters = [
             CorsOptions::ROUTE_PARAM => [
                 'allowed_origins'     => ['http://example.org'],
@@ -390,8 +388,7 @@ class CorsServiceTest extends TestCase
             ],
         ];
 
-        $routeMatch = class_exists(DeprecatedRouteMatch::class) ? new DeprecatedRouteMatch($routeMatchParameters) :
-            new RouteMatch($routeMatchParameters);
+        $routeMatch = new RouteMatch($routeMatchParameters);
 
         $request = new HttpRequest();
         $request->getHeaders()->addHeaderLine('Origin', 'http://example.org');
@@ -440,8 +437,7 @@ class CorsServiceTest extends TestCase
             ],
         ];
 
-        $routeMatch = class_exists(DeprecatedRouteMatch::class) ? new DeprecatedRouteMatch($routeMatchParameters) :
-            new RouteMatch($routeMatchParameters);
+        $routeMatch = new RouteMatch($routeMatchParameters);
 
         $request->getHeaders()->addHeaderLine('Origin', 'http://example.org');
 
@@ -456,7 +452,7 @@ class CorsServiceTest extends TestCase
     /**
      * @see https://github.com/zf-fr/zfr-cors/issues/57
      */
-    public function testCanPopulateNormalCorsRequestWithRouteMatchRewriteException()
+    public function testCanPopulateNormalCorsRequestWithRouteMatchRewriteException(): void
     {
         $request  = new HttpRequest();
         $response = new HttpResponse();
@@ -466,8 +462,7 @@ class CorsServiceTest extends TestCase
             ],
         ];
 
-        $routeMatch = class_exists(DeprecatedRouteMatch::class) ? new DeprecatedRouteMatch($routeMatchParameters) :
-            new RouteMatch($routeMatchParameters);
+        $routeMatch = new RouteMatch($routeMatchParameters);
 
         $request->getHeaders()->addHeaderLine('Origin', 'http://example.com');
 

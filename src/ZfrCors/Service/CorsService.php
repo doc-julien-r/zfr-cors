@@ -18,7 +18,6 @@
 
 namespace ZfrCors\Service;
 
-use Laminas\Mvc\Router\Http\RouteMatch as DeprecatedRouteMatch;
 use Laminas\Router\Http\RouteMatch;
 use Laminas\Http\Header;
 use Laminas\Uri\UriFactory;
@@ -126,14 +125,14 @@ class CorsService
      * Create a preflight response by adding the correspoding headers which are merged with per-route configuration
      *
      * @param HttpRequest                          $request
-     * @param RouteMatch|DeprecatedRouteMatch|null $routeMatch
+     * @param RouteMatch|null $routeMatch
      *
      * @return HttpResponse
      */
     public function createPreflightCorsResponseWithRouteOptions(HttpRequest $request, $routeMatch = null)
     {
         $options = $this->options;
-        if ($routeMatch instanceof RouteMatch || $routeMatch instanceof DeprecatedRouteMatch) {
+        if ($routeMatch instanceof RouteMatch) {
             $options->setFromArray($routeMatch->getParam(CorsOptions::ROUTE_PARAM) ?: []);
         }
         $response = $this->createPreflightCorsResponse($request);
@@ -152,7 +151,7 @@ class CorsService
      */
     public function populateCorsResponse(HttpRequest $request, HttpResponse $response, $routeMatch = null)
     {
-        if ($routeMatch instanceof RouteMatch || $routeMatch instanceof DeprecatedRouteMatch) {
+        if ($routeMatch instanceof RouteMatch) {
             $this->options->setFromArray($routeMatch->getParam(CorsOptions::ROUTE_PARAM) ?: []);
         }
 
