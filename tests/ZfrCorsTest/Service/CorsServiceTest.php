@@ -18,7 +18,7 @@
 
 namespace ZfrCorsTest\Service;
 
-use PHPUnit\Framework\TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 use Laminas\Http\Response as HttpResponse;
 use Laminas\Http\Request as HttpRequest;
 use Laminas\Mvc\MvcEvent;

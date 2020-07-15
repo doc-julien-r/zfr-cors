@@ -29,7 +29,7 @@ use ZfrCors\Module;
  *
  * @group Coverage
  */
-class ModuleTest extends \PHPUnit\Framework\TestCase
+class ModuleTest extends TestCase
 {
     /**
      * @covers \ZfrCors\Module::getConfig

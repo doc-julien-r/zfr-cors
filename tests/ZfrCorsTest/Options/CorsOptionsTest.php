@@ -18,7 +18,7 @@
 
 namespace ZfrCorsTest\Options;
 
-use PHPUnit\Framework\TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 use ZfrCors\Options\CorsOptions;
 
 /**
