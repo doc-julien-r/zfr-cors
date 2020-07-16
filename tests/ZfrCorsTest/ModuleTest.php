@@ -29,7 +29,7 @@ use ZfrCors\Module;
  *
  * @group Coverage
  */
-class ModuleTest extends \PHPUnit\Framework\TestCase
+class ModuleTest extends TestCase
 {
     /**
      * @covers \ZfrCors\Module::getConfig
@@ -48,12 +48,12 @@ class ModuleTest extends \PHPUnit\Framework\TestCase
     public function testAssertListenerIsCorrectlyRegistered()
     {
         $module         = new Module();
-        $mvcEvent       = $this->getMockBuilder('Zend\Mvc\MvcEvent')->getMock();
-        $application    = $this->getMockBuilder('Zend\Mvc\Application', [], [], '', false)
+        $mvcEvent       = $this->getMockBuilder('Laminas\Mvc\MvcEvent')->getMock();
+        $application    = $this->getMockBuilder('Laminas\Mvc\Application', [], [], '', false)
             ->disableOriginalConstructor()
             ->getMock();
-        $eventManager   = $this->getMockBuilder('Zend\EventManager\EventManagerInterface')->getMock();
-        $serviceManager = $this->getMockBuilder('Zend\ServiceManager\ServiceManager')->getMock();
+        $eventManager   = $this->getMockBuilder('Laminas\EventManager\EventManagerInterface')->getMock();
+        $serviceManager = $this->getMockBuilder('Laminas\ServiceManager\ServiceManager')->getMock();
         $corsListener   = $this->getMockBuilder('ZfrCors\Mvc\CorsRequestListener', [], [], '', false)
             ->disableOriginalConstructor()
             ->getMock();

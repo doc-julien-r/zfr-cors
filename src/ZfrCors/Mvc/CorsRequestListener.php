@@ -18,11 +18,11 @@
 
 namespace ZfrCors\Mvc;
 
-use Zend\EventManager\AbstractListenerAggregate;
-use Zend\EventManager\EventManagerInterface;
-use Zend\Http\Response as HttpResponse;
-use Zend\Http\Request as HttpRequest;
-use Zend\Mvc\MvcEvent;
+use Laminas\EventManager\AbstractListenerAggregate;
+use Laminas\EventManager\EventManagerInterface;
+use Laminas\Http\Response as HttpResponse;
+use Laminas\Http\Request as HttpRequest;
+use Laminas\Mvc\MvcEvent;
 use ZfrCors\Exception\DisallowedOriginException;
 use ZfrCors\Exception\InvalidOriginException;
 use ZfrCors\Service\CorsService;
