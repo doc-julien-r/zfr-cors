@@ -1,6 +1,6 @@
 {
-    "name": "zfr/zfr-cors",
-    "description": "Zend Framework module that let you deal with CORS requests",
+    "name": "alejandro-fiore/zfr-cors",
+    "description": "Laminas module that let you deal with CORS requests",
     "type": "library",
     "license": "MIT",
     "keywords": [
@@ -10,7 +10,7 @@
         "rest",
         "cross origin sharing resource"
     ],
-    "homepage": "https://github.com/zf-fr/zfr-cors",
+    "homepage": "https://github.com/alejandro-fiore/zfr-cors",
     "authors": [
         {
             "name": "Florent Blaison",
